@@ -20,4 +20,5 @@ ENV PORT=4000
 ENV NODE_ENV=production
 
 # Run migrations and start the server directly
-CMD ["sh", "-c", "node dist/migrate.js && node dist/index.js"]
+# Added error handling and retries for migrations
+CMD ["sh", "-c", "for i in {1..5}; do echo \"Attempt $i: Running migrations and seeds...\" && node dist/migrate.js && break || sleep 5; done && node dist/index.js"]

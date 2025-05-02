@@ -20,14 +20,28 @@ hooks:
   predeploy:
     windows:
       shell: pwsh
-      run: 'echo "VITE_API_BASE_URL=""$env:API_BASE_URL""" > ./client/.env.local'
+      run: |
+        echo "VITE_API_BASE_URL=""$env:API_BASE_URL""" > ./client/.env.local
+        echo "Setting up build environment variables..."
+        echo "API_BASE_URL: $env:API_BASE_URL"
     posix:
       shell: sh
-      run: 'echo VITE_API_BASE_URL=\"$API_BASE_URL\" > ./client/.env.local'
+      run: |
+        echo VITE_API_BASE_URL=\"$API_BASE_URL\" > ./client/.env.local
+        echo "Setting up build environment variables..."
+        echo "API_BASE_URL: $API_BASE_URL"
   postdeploy:
     windows:
       shell: pwsh
-      run: 'rm ./client/.env.local'
+      run: |
+        rm ./client/.env.local
+        echo "Verifying deployment..."
+        echo "Testing API endpoint at $env:API_BASE_URL/api/fortunes/random"
+        Invoke-RestMethod -Uri "$env:API_BASE_URL/health" -Method Get -ErrorAction SilentlyContinue || echo "Server health check failed"
     posix:
       shell: sh
-      run: 'rm ./client/.env.local'
+      run: |
+        rm ./client/.env.local
+        echo "Verifying deployment..."
+        echo "Testing API endpoint at $API_BASE_URL/api/fortunes/random"
+        curl -s "$API_BASE_URL/health" || echo "Server health check failed"

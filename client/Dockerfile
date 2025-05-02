@@ -26,8 +26,12 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Make sure nginx can find our files
 RUN ln -sf /usr/share/nginx/html /etc/nginx/html
 
+# Add script to handle environment variables
+COPY --from=builder /app/docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 EXPOSE 80
 
-# Using ENTRYPOINT and CMD as defined in the official nginx image
-ENTRYPOINT ["/docker-entrypoint.sh"]
+# Use our custom entrypoint to inject environment variables into the nginx config
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
