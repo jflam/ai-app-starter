@@ -9,9 +9,6 @@ param environmentName string
 @description('Primary location for all resources')
 param location string
 
-@description('Id of the user or app to assign application roles')
-param principalId string = ''
-
 // Tags that should be applied to all resources.
 var baseTags = {
   'azd-env-name': environmentName
