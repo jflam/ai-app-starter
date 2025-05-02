@@ -1,4 +1,7 @@
-# AI Starter App
+# AI Starter App (SQLite)
+
+> This repository is the **SQLite‑focused edition** of the starter app.  
+> A Postgres variant is also [available](https://github.com/jflam/ai-app-starter-postgres) if you need a different database backend.
 
 Opinionated full‑stack skeleton meant to be **forked and cloned** so you (or your AI pair‑programmer) can start coding features immediately instead of scaffolding a project from scratch.
 
