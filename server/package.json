@@ -1,11 +1,11 @@
 {
   "name": "fortune-app-server",
-  "version": "1.0.0",
-  "scripts": {
+  "version": "1.0.0",  "scripts": {
     "dev": "knex migrate:latest && knex seed:run && ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
     "migrate": "knex migrate:latest",
-    "seed": "knex seed:run"
+    "seed": "knex seed:run",
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "express": "5.1.0",

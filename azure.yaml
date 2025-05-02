@@ -1,0 +1,33 @@
+name: ai-app-starter
+metadata:
+  template: ai-app-starter@0.0.1
+workflows:
+  up: 
+    steps:
+      - azd: provision
+      - azd: deploy --all
+services:
+  server:
+    project: ./server
+    language: js
+    host: containerapp
+  client:
+    project: ./client
+    language: js
+    host: containerapp
+hooks:
+  # Creates a temporary `.env` file for the build command
+  predeploy:
+    windows:
+      shell: pwsh
+      run: 'echo "VITE_API_BASE_URL=""$env:API_BASE_URL""" > ./client/.env.local'
+    posix:
+      shell: sh
+      run: 'echo VITE_API_BASE_URL=\"$API_BASE_URL\" > ./client/.env.local'
+  postdeploy:
+    windows:
+      shell: pwsh
+      run: 'rm ./client/.env.local'
+    posix:
+      shell: sh
+      run: 'rm ./client/.env.local'

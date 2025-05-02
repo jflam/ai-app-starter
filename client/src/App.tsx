@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+// Import the type declarations to recognize import.meta.env
+/// <reference types="vite/client" />
 
 interface Fortune {
   id: number;
@@ -8,13 +10,12 @@ interface Fortune {
 export default function App() {
   const [fortune, setFortune] = useState<Fortune | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchFortune = async () => {
+  const [error, setError] = useState<string | null>(null);  const fetchFortune = async () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('/api/fortunes/random');
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const res = await fetch(`${apiBaseUrl}/api/fortunes/random`);
       if (!res.ok) throw new Error('Failed to load fortune');
       setFortune(await res.json());
     } catch (e: any) {

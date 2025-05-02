@@ -1,0 +1,10 @@
+{
+  "appContainerApps": "ca",
+  "appServicePlan": "plan",
+  "cognitiveServices": "cog",
+  "containerRegistry": "cr",
+  "keyVault": "kv",
+  "logAnalyticsWorkspace": "log",
+  "managedIdentity": "mi",
+  "cosmosNoSql": "nosql"
+}
