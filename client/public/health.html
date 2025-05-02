@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Check</title>
+</head>
+<body>
+    <h1>App Client Health: OK</h1>
+    <p>Timestamp: <span id="timestamp"></span></p>
+    <script>
+        document.getElementById('timestamp').textContent = new Date().toISOString();
+        // Log configuration for debugging
+        console.log('API_BASE_URL from window:', window.API_BASE_URL);
+        console.log('Current URL:', window.location.href);
+    </script>
+</body>
+</html>
