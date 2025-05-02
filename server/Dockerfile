@@ -19,8 +19,5 @@ EXPOSE 4000
 ENV PORT=4000
 ENV NODE_ENV=production
 
-# Create a startup script to run migrations and start the server
-RUN echo "#!/bin/sh\nnode dist/migrate.js && npm start" > /app/startup.sh && \
-    chmod +x /app/startup.sh
-
-CMD ["/app/startup.sh"]
+# Run migrations and start the server directly
+CMD ["sh", "-c", "node dist/migrate.js && node dist/index.js"]
